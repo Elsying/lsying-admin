@@ -1,15 +1,18 @@
 package com.example.outsourcetoa.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.geekidea.springbootplus.framework.common.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import io.geekidea.springbootplus.framework.util.JsonSerializeUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import lombok.experimental.Accessors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,7 +22,7 @@ import io.geekidea.springbootplus.framework.core.validator.groups.Update;
  * 
  *
  * @author lsy
- * @since 2020-11-30
+ * @since 2020-12-17
  */
 @Data
 @Accessors(chain = true)
@@ -35,6 +38,7 @@ public class Commodity extends BaseEntity {
     @ApiModelProperty("设备id")
     private Integer did;
 
+    @JsonSerialize(using = JsonSerializeUtils.class)
     @ApiModelProperty("商品名称")
     private String name;
 
@@ -74,9 +78,22 @@ public class Commodity extends BaseEntity {
     @ApiModelProperty("上架状态 0：未上架，1：已上架")
     private Integer shelfStatus;
 
-    @ApiModelProperty("图片url数组字符串")
+    @ApiModelProperty("图片url数组")
     private String piclist;
 
+    @ApiModelProperty("距上方随机数开始")
+    private Integer upstart;
+
+    @ApiModelProperty("距上方随机数结束")
+    private Integer upend;
+
+    @ApiModelProperty("距左方随机数开始")
+    private Integer leftstart;
+
+    @ApiModelProperty("距左方随机数结束")
+    private Integer leftend;
+
+    @JsonSerialize(using = JsonSerializeUtils.class)
     @ApiModelProperty("商品说明")
     private String description;
 

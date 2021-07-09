@@ -47,12 +47,12 @@ public class SpringBootPlusGenerator {
         generatorProperties
                 .setMavenModuleName("example")
                 .setParentPackage("com.example")
-                .setModuleName("outsourcetoa")
+                .setModuleName("outsourcetob")
                 .setAuthor("lsy")
                 .setFileOverride(true);
 
         // 设置表信息
-        generatorProperties.addTable("commodity","id");
+        generatorProperties.addTable("account_one","id");
 
         // 设置表信息
 //        generatorProperties.setTables("device_commodity","commodity","commodity_image");

@@ -3,8 +3,10 @@ package com.example.outsourcetoa.vo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.geekidea.springbootplus.framework.common.entity.BaseEntity;
 import io.geekidea.springbootplus.framework.core.validator.groups.Update;
+import io.geekidea.springbootplus.framework.util.JsonSerializeUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -34,6 +36,10 @@ public class CommodityVo implements Serializable {
     @ApiModelProperty("设备id")
     private Integer did;
 
+    @ApiModelProperty("用户名")
+    private String username;
+
+    @JsonSerialize(using = JsonSerializeUtils.class)
     @ApiModelProperty("商品名称")
     private String name;
 
@@ -76,6 +82,19 @@ public class CommodityVo implements Serializable {
     @ApiModelProperty("图片url数组")
     private String piclist;
 
+    @ApiModelProperty("距上方随机数开始")
+    private Integer upstart;
+
+    @ApiModelProperty("距上方随机数结束")
+    private Integer upend;
+
+    @ApiModelProperty("距左方随机数开始")
+    private Integer leftstart;
+
+    @ApiModelProperty("距左方随机数结束")
+    private Integer leftend;
+
+    @JsonSerialize(using = JsonSerializeUtils.class)
     @ApiModelProperty("商品说明")
     private String description;
 

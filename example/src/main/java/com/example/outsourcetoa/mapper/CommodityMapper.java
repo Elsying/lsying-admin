@@ -15,7 +15,7 @@ import java.io.Serializable;
  *  Mapper 接口
  *
  * @author lsy
- * @since 2020-11-30
+ * @since 2020-12-17
  */
 @Repository
 public interface CommodityMapper extends BaseMapper<Commodity> {

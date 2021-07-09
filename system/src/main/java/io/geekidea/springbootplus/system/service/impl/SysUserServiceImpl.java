@@ -16,6 +16,7 @@
 
 package io.geekidea.springbootplus.system.service.impl;
 
+import cn.hutool.core.lang.Console;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
@@ -25,6 +26,7 @@ import io.geekidea.springbootplus.framework.common.exception.BusinessException;
 import io.geekidea.springbootplus.framework.common.service.impl.BaseServiceImpl;
 import io.geekidea.springbootplus.framework.core.pagination.PageInfo;
 import io.geekidea.springbootplus.framework.core.pagination.Paging;
+import io.geekidea.springbootplus.framework.shiro.cache.LoginRedisService;
 import io.geekidea.springbootplus.framework.shiro.util.SaltUtil;
 import io.geekidea.springbootplus.framework.util.PasswordUtil;
 import io.geekidea.springbootplus.framework.util.PhoneUtil;
@@ -43,6 +45,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,6 +78,15 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
 
     @Autowired
     private SpringBootPlusProperties springBootPlusProperties;
+
+    @Lazy
+    @Autowired
+    private LoginRedisService loginRedisService;
+
+    @Lazy
+    @Autowired
+    private RedisTemplate redisTemplate;
+
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -122,6 +134,12 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
             throw new BusinessException("修改的用户不存在");
         }
 
+        // 账号不可使用，去除该账号token
+        if(!StateEnum.ENABLE.getCode().equals(sysUser.getState())){
+            Console.log("删除token"+sysUser);
+            loginRedisService.deleteUserAllCache(getSysUserById(sysUser.getId()).getUsername());
+        }
+
         // 修改系统用户
         updateSysUser.setNickname(sysUser.getNickname())
                 .setPhone(sysUser.getPhone())
@@ -137,6 +155,9 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUser> 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean deleteSysUser(Long id) throws Exception {
+
+        // 账号不可使用，去除该账号token
+        loginRedisService.deleteUserAllCache(getSysUserById(id).getUsername());
         return super.removeById(id);
     }
 

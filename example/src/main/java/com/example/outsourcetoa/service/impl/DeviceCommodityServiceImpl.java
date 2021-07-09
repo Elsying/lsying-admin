@@ -21,6 +21,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.geekidea.springbootplus.framework.shiro.util.JwtTokenUtil;
 import io.geekidea.springbootplus.framework.shiro.util.JwtUtil;
 import io.geekidea.springbootplus.system.entity.SysUser;
+import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -102,13 +103,7 @@ public class DeviceCommodityServiceImpl extends BaseServiceImpl<DeviceCommodityM
             LambdaQueryWrapper<Commodity> wrapper2 = new LambdaQueryWrapper<>();
             wrapper2.eq(Commodity::getDid, item.getId());
             DeviceCommodityVo deviceCommodityVo=new DeviceCommodityVo();
-            deviceCommodityVo.setId(item.getId());
-            deviceCommodityVo.setUsername(item.getUsername());
-            deviceCommodityVo.setDid(item.getDid());
-            deviceCommodityVo.setDname(item.getDname());
-            deviceCommodityVo.setRemarks(item.getRemarks());
-            deviceCommodityVo.setUpdateTime(item.getUpdateTime());
-            deviceCommodityVo.setCreateTime(item.getCreateTime());
+            BeanUtils.copyProperties(item,deviceCommodityVo);
             deviceCommodityVo.setCommoditynum(commodityMapper.selectCount(wrapper2));
             newdc.add(deviceCommodityVo);
         });
@@ -130,13 +125,7 @@ public class DeviceCommodityServiceImpl extends BaseServiceImpl<DeviceCommodityM
             LambdaQueryWrapper<Commodity> wrapper2 = new LambdaQueryWrapper<>();
             wrapper2.eq(Commodity::getDid, item.getId());
             DeviceCommodityVo deviceCommodityVo=new DeviceCommodityVo();
-            deviceCommodityVo.setId(item.getId());
-            deviceCommodityVo.setUsername(item.getUsername());
-            deviceCommodityVo.setDid(item.getDid());
-            deviceCommodityVo.setDname(item.getDname());
-            deviceCommodityVo.setRemarks(item.getRemarks());
-            deviceCommodityVo.setUpdateTime(item.getUpdateTime());
-            deviceCommodityVo.setCreateTime(item.getCreateTime());
+            BeanUtils.copyProperties(item,deviceCommodityVo);
             deviceCommodityVo.setCommoditynum(commodityMapper.selectCount(wrapper2));
             newdc.add(deviceCommodityVo);
         });
@@ -151,6 +140,13 @@ public class DeviceCommodityServiceImpl extends BaseServiceImpl<DeviceCommodityM
     public DeviceCommodity getDeviceCommodityBydid(String did) throws Exception {
         LambdaQueryWrapper<DeviceCommodity> wrapperdev = Wrappers.<DeviceCommodity>lambdaQuery()
                 .eq(DeviceCommodity::getDid, did);
+        return this.getOne(wrapperdev);
+    }
+
+    @Override
+    public DeviceCommodity getDeviceCommodityByid(Integer id) throws Exception {
+        LambdaQueryWrapper<DeviceCommodity> wrapperdev = Wrappers.<DeviceCommodity>lambdaQuery()
+                .eq(DeviceCommodity::getId, id);
         return this.getOne(wrapperdev);
     }
 

@@ -52,7 +52,7 @@ public class ImageUtils {
         SplittableRandom random = new SplittableRandom();
         random.nextInt(10);
         new Random().ints(0,100);
-
+        ThreadLocalRandom.current().nextInt(1,2);
         // 1-缩放图像：
         // 方法一：按比例缩放
 //        ImageUtils.scale("D:\\aa\\a.jpg", "D:\\aa\\a1.jpg", 2, true);//测试OK
@@ -62,7 +62,7 @@ public class ImageUtils {
 //
 //        // 2-切割图像：
         // 方法一：按指定起点坐标和宽高切割
-        ImageUtils.cut("D:\\aa\\a.jpg", "D:\\aa\\a3.jpg", 0, 0);//测试OK
+        ImageUtils.cut("C:\\opt\\upload\\aa\\a.jpg", "C:\\opt\\upload\\aa\\b.jpg", 100, 0);//测试OK
 //        // 方法二：指定切片的行数和列数
 //        ImageUtils.cut2("D:\\aa\\a.jpg", "D:\\aa\\a3.jpg", 2, 2 );//测试OK
         // 方法三：指定切片的宽度和高度
@@ -185,20 +185,17 @@ public class ImageUtils {
         try {
             // 读取源图像
             BufferedImage bi = ImageIO.read(new File(srcImageFile));
-            int srcWidth = bi.getHeight(); // 源图宽度
-            int srcHeight = bi.getWidth(); // 源图高度
+            int srcWidth = bi.getWidth(); // 源图宽度
+            int srcHeight = bi.getHeight(); // 源图高度
             int width=srcWidth-x;
             int height=srcHeight-y;
             if (srcWidth > 0 && srcHeight > 0) {
-                Image image = bi.getScaledInstance(srcWidth, srcHeight,
-                        Image.SCALE_DEFAULT);
+                Image image = bi.getScaledInstance(srcWidth, srcHeight, Image.SCALE_DEFAULT);
                 // 四个参数分别为图像起点坐标和宽高
                 // 即: CropImageFilter(int x,int y,int width,int height)
 //                ImageFilter cropFilter = new CropImageFilter(x, y, width, height);
                 ImageFilter cropFilter = new CropImageFilter(x, y, width, height);
-                Image img = Toolkit.getDefaultToolkit().createImage(
-                        new FilteredImageSource(image.getSource(),
-                                cropFilter));
+                Image img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(image.getSource(), cropFilter));
                 BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
                 Graphics g = tag.getGraphics();
                 g.drawImage(img, 0, 0, width, height, null); // 绘制切割后的图

@@ -71,4 +71,14 @@ public interface DeviceCommodityService extends BaseService<DeviceCommodity> {
      */
      DeviceCommodity getDeviceCommodityBydid(String did) throws Exception;
 
+
+    /**
+     * 根据设备id获取设备
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+     DeviceCommodity getDeviceCommodityByid(Integer id) throws Exception;
+
 }

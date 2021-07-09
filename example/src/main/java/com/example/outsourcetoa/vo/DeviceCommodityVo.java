@@ -18,7 +18,7 @@ import java.util.Date;
 
 @Data
 @Accessors(chain = true)
-@ApiModel(value = "DeviceCommodityVo对象", description = "系统用户查询参数")
+@ApiModel(value = "DeviceCommodityVo对象")
 public class DeviceCommodityVo implements Serializable {
     private static final long serialVersionUID = 1L;
 

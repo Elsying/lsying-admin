@@ -159,9 +159,10 @@ public class LoginServiceImpl implements LoginService {
 
         // 获取当前用户权限
         Set<String> permissionCodes = sysRolePermissionService.getPermissionCodesByRoleId(roleId);
-        if (CollectionUtils.isEmpty(permissionCodes)) {
-            throw new AuthenticationException("权限列表不能为空");
-        }
+        //可以为空
+//        if (CollectionUtils.isEmpty(permissionCodes)) {
+//            throw new AuthenticationException("权限列表不能为空");
+//        }
         loginSysUserVo.setPermissionCodes(permissionCodes);
 
         // 获取数据库中保存的盐值

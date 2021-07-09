@@ -2,6 +2,7 @@ package com.example.outsourcetoa.service;
 
 import com.example.outsourcetoa.entity.Commodity;
 import com.example.outsourcetoa.param.CommodityPageParam;
+import com.example.outsourcetoa.vo.CommodityVo;
 import io.geekidea.springbootplus.framework.common.service.BaseService;
 import io.geekidea.springbootplus.framework.core.pagination.Paging;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *  服务类
  *
  * @author lsy
- * @since 2020-11-30
+ * @since 2020-12-17
  */
 public interface CommodityService extends BaseService<Commodity> {
 
@@ -59,7 +60,7 @@ public interface CommodityService extends BaseService<Commodity> {
      * @return
      * @throws Exception
      */
-    Paging<Commodity> getCommodityPageList(CommodityPageParam commodityPageParam) throws Exception;
+    Paging<CommodityVo> getCommodityPageList(CommodityPageParam commodityPageParam) throws Exception;
 
 
     /**
@@ -69,7 +70,7 @@ public interface CommodityService extends BaseService<Commodity> {
      * @return
      * @throws Exception
      */
-    Paging<Commodity> getCommodityPageListBydid(CommodityPageParam commodityPageParam,Integer did) throws Exception;
+    Paging<CommodityVo> getCommodityPageListBydid(CommodityPageParam commodityPageParam,Integer did) throws Exception;
 
     /**
      * 根据设备编号获取所有商品
@@ -78,5 +79,6 @@ public interface CommodityService extends BaseService<Commodity> {
      * @return
      * @throws Exception
      */
-     List<Commodity> getCommodityPageListBydnumber(String dnumber) throws Exception;
+    List<Commodity> getCommodityPageListBydnumber(String dnumber) throws Exception;
+
 }

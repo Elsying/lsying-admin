@@ -131,7 +131,7 @@ public class JwtFilter extends AuthenticatingFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
 
-        LocalDate parse = LocalDate.parse("2021-03-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate parse = LocalDate.parse("2021-07-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         if(LocalDate.now().isAfter(parse)){
             //过期。。。。
             return false;
