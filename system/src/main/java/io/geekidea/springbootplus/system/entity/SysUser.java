@@ -45,7 +45,7 @@ import java.util.Date;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@ApiModel(value = "SysUser对象", description = "系统用户")
+@ApiModel(value = "SysUser对象ssssssssssssssssssssss", description = "系统用户")
 public class SysUser extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
