@@ -46,7 +46,7 @@ public final class BrowserUtil {
     public static String getCurrent(HttpServletRequest request) {
         String userAgent = request.getHeader("USER-AGENT").toLowerCase();
         if (userAgent != null && !("".equals(userAgent.trim()))) {
-            if (userAgent.indexOf(CHROME)  0) {
+            if (userAgent.indexOf(CHROME) > 0) {
                 return CHROME;
             } else if (userAgent.indexOf(FIREFOX) >= 0) {
                 return FIREFOX;

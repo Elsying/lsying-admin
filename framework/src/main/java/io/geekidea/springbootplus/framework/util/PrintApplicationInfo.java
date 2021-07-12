@@ -40,28 +40,6 @@ public class PrintApplicationInfo {
         // 项目profile
         String profileActive = environment.getProperty("spring.profiles.active");
         StringBuffer tip = new StringBuffer();
-        tip.append("===========================================================================================\n");
-        tip.append("                                                                                  \n");
-        tip.append("                               !!!准备工作!!!                                      \n");
-        tip.append(" 1.导入SQL初始化脚本：docs/db，根据不同数据库导入对应SQL脚本并修改链接等信息配置\n");
-        tip.append(" 2.启动Redis服务，必要条件\n");
-        tip.append(" 3.启动SpringBootAdmin Server，可选操作，admin模块中，启动SpringBootPlusAdminApplication\n");
-        tip.append(" 4.根据项目需要，修改项目配置，请先查看官网配置文档：https://springboot.plus/config/\n");
-        tip.append(" 5.项目模块说明：\n");
-        tip.append("    admin：       SpringBootAdmin Server启动模块\n");
-        tip.append("    bootstrap：   项目启动模块\n");
-        tip.append("    config：      项目配置模块\n");
-        tip.append("    distribution：项目打包模块，打包时，请先选中Maven Profiles中的release和对应环境\n");
-        tip.append("    example：     业务自定义模块，自己的业务代码可在example下进行，也可以再创建模块\n");
-        tip.append("    framework：   项目核心框架模块\n");
-        tip.append("    generator：   代码生成模块，启动类：SpringBootPlusGenerator，请根据实际情况进行配置\n");
-        tip.append("    scheduled：   任务调度模块\n");
-        tip.append("    system：      系统管理模块\n");
-        tip.append(" 6.FAQ：https://springboot.plus/faq\n");
-        tip.append(" 7.如开发中遇到bug及问题，欢迎提交ISSUES：https://github.com/geekidea/spring-boot-plus/issues\n");
-        tip.append(" 8.QQ：625301326，进群答案：springboot.plus\n");
-        tip.append("                                                                                  \n");
-        tip.append("===========================================================================================\n");
         if ("dev".equals(profileActive)) {
             log.info("\n{}", Ansi.ansi().eraseScreen().fg(Ansi.Color.YELLOW).a(tip.toString()).reset().toString());
         }
