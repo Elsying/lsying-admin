@@ -18,9 +18,12 @@ package io.geekidea.springbootplus.framework.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import lombok.NonNull;
 
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -111,6 +114,35 @@ public class Jackson {
         }
         return null;
     }
+
+
+    /**
+     * json字符串转成list
+     *
+     * @param jsonString
+     * @param cls
+     * @return
+     */
+    public static <T> List<T> jsonToList(@NonNull String jsonString, Class<T> cls) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(jsonString, getCollectionType(mapper, cls));
+        } catch (JsonProcessingException e) {
+            String className = cls.getSimpleName();
+        }
+        return null;
+    }
+
+    /**
+     * 获取泛型的Collection Type
+     *
+     * @param elementClasses  实体bean
+     * @return JavaType Java类型
+     */
+    private static JavaType getCollectionType(ObjectMapper mapper, Class<?>... elementClasses) {
+        return mapper.getTypeFactory().constructParametricType(List.class, elementClasses);
+    }
+
 
 
 }
